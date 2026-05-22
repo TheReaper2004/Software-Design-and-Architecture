@@ -1,137 +1,182 @@
 # Software-Design-and-Architecture
 
-## What is this project?
-This project is a Java board game simulation.
-The game is played on a 6x6 board with 4 players.
-Each player rolls two dice and moves around the board.
-The first player to reach the end position wins the game.
-The game currently uses automated players to simulate gameplay.
-This allows easier testing of game rules and board interactions.
+## Project Overview
+This project is a Java console board game simulation.
+The game supports:
+- 2 to 4 players
+- dice rolling
+- wormholes
+- hit rules
+- turn tracking
+- movement tracking
+The game is played on a 6x6 board.
+The first player to reach the end position wins.
 
 # Features
-1. Four Players
-The game has:
-- Red player
-- Blue player
-- Yellow player
-- Green player
-Each player starts in a different position.
+## Implemented Features
+- Multiple player support
+- Random dice rolling
+- Interactive turn system
+- Starting player selection
+- Board display
+- Wormholes
+- Hit rule
+- Turn counting
+- Movement counting
+- Game state messages
+- Final summary table
 
-2. Dice Rolling
-The game uses two dice.
-The dice values are random.
-This makes every game different.
+# How To Play
+1. Start the program.
+2. Choose number of players.
+3. The game decides who starts first.
+4. Press ENTER each turn.
+5. Players roll two dice.
+6. Players move around the board.
+7. Wormholes teleport players.
+8. Landing on another player cancels the move.
+9. First player to reach the end wins.
 
-3. Movement System
-Players move after rolling the dice.
-The total movement is tracked during the game.
-The movement is shown in the final summary table.
+# Classes
+## Main Class
+Starts the game.
+Creates the Game object.
 
-4. Hit Rule
-If a player lands on another player:
-- the move is cancelled
-- the player loses the turn
-- the player stays in the same place
-This creates more challenge in the game.
+## Game Class
+Controls:
+- game loop
+- turns
+- movement
+- board display
+- wormholes
+- hit rule
+- winner checking
 
-5. Wormholes
-The board contains wormholes.
-If a player lands on a wormhole:
-- the player teleports to another position
-Example:
-- position 4 goes to 9
-- position 19 goes to 23
-This makes the game more interesting.
-
-## Classes Used
-Main Class
-The Main class starts the game.
-It creates the Game object and runs the play method.
-
-# Game Class
-The Game class controls the game.
-Responsibilities:
-- controls turns
-- rolls dice
-- checks winners
-- handles hit rule
-- handles wormholes
-- prints summary
-
-# Player Class
-The Player class stores player information.
-It stores:
+## Player Class
+Stores:
 - player name
-- current position
-- total movement
+- player position
+- movement
+- turns
 - end position
-The Player class also controls movement.
 
-# Dice Class
-The Dice class rolls two random dice.
-This class uses Java Random.
+## Dice Class
+Generates random dice rolls.
+Uses Java Random class.
 
-# Board Class
-The Board class stores wormholes.
-It checks if a player enters a wormhole.
+## Board Class
+Stores wormholes.
+Checks teleport positions.
 
-# Wormhole Class
-The Wormhole class stores:
-- start position
-- end position
-It teleports players between positions.
+## Wormhole Class
+Represents teleport locations on the board.
 
 # Object Oriented Programming
-This project uses Object Oriented Programming (OOP).
-The program is split into multiple classes.
-Each class has a different responsibility.
+This project uses Object Oriented Programming.
+The program is separated into multiple classes.
+Each class has its own responsibility.
 This makes the code:
 - cleaner
-- easier to understand
 - easier to maintain
+- easier to understand
 
-# Java Concepts Used
-This project uses:
-- classes
-- objects
-- loops
-- methods
-- lists
-- random numbers
-- encapsulation
-- condition statements
+# SOLID Principles
+## Single Responsibility Principle
+Each class performs one main task.
+Examples:
+- Dice handles dice rolling
+- Player stores player data
+- Board handles wormholes
 
-# Game Rules
-1. A player rolls two dice.
-2. The player moves around the board.
-3. If the player lands on another player, the move is cancelled.
-4. Wormholes teleport players to other positions.
-5. The first player to reach the end wins.
+# Game State System
+The game contains different states:
+- Ready
+- In Play
+- Game Over
+These states are displayed during gameplay.
 
-## Example Output
+# UML Diagram
+```mermaid
+classDiagram
+Main --> Game
+Game --> Player
+Game --> Dice
+Game --> Board
+Board --> Wormhole
+class Main {
+    +main()
+}
+class Game {
+    +play()
+    +displayBoard()
+    +printSummary()
+}
+class Player {
+    -name
+    -position
+    -movement
+    -turns
+}
+class Dice {
+    +roll()
+}
+class Board {
+    +checkWormhole()
+}
+class Wormhole {
+    +teleport()
+}
+```
 
-# Example Game Summary
-| Player | Position | Movement |
-|--------|----------|----------|
-| Red    |    35    |    34    |
-| Blue   |     6    |    22    |
-| Yellow |    12    |    24    |
-| Green  |    23    |    18    |
+# Example Output
+## Example Summary Table
+| Player | Position | Turns | Movement |
+|--------|----------|-------|----------|
+| Red    |    35    |   4   |    34    |
+| Blue   |     6    |   4   |    22    |
+| Yellow |    12    |   3   |    24    |
+| Green  |    23    |   3   |    18    |
+
 Winner: Blue
-Total turns: 14
+
+# Design Decisions
+The project was designed using multiple classes instead of one large file.
+This improves:
+- readability
+- maintainability
+- organisation
+The console board was added to improve user interaction.
+The game was designed as a simulation with interactive turns.
+
+# Reflection
+During this project I learned:
+- how to create Java classes
+- how objects interact
+- how to use loops and lists
+- how to create board game logic
+- how to separate responsibilities between classes
+The biggest challenge was implementing:
+- movement logic
+- hit rule
+- wormholes
+- board display
+
+# Future Improvements
+Possible future improvements:
+- save/load system
+- graphical interface
+- replay system
+- more board types
+- more game rules
+- multiplayer networking
 
 # Conclusion
-This project successfully creates a playable board game simulation using Java.
+This project successfully creates a playable Java board game simulation.
 The project demonstrates:
 - object oriented programming
 - multiple classes
-- game logic
 - random gameplay
-- board rules
+- board logic
+- player interaction
 - movement tracking
-- console output
-The game can be expanded in the future by adding:
-- save system
-- graphical interface
-- more board rules
-- different game modes
+- console visualisation
